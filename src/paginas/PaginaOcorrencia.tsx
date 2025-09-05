@@ -1,13 +1,16 @@
 import { useParams, useNavigate } from "react-router-dom";
-import type { Pessoa } from "../tipos";
+import type { Pessoa, Ocorrencia } from "../tipos";
 import { FaArrowLeft, FaShareAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import Modal from "../componentes/Modal";
+import OcorrenciaModal from "../componentes/CadastroOcorrenciaModal";
 
 
 export default function PessoaDetalhes() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [isLoading, setisLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [pessoa, setPessoa] = useState<Pessoa>({
     "id": 0,
     "nome": "",
@@ -28,6 +31,14 @@ export default function PessoaDetalhes() {
       "ocoId": 0
     }
   });
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  }
 
   useEffect(() => {
       setisLoading(true);
@@ -62,7 +73,7 @@ export default function PessoaDetalhes() {
 
       {isLoading && <div className="animate-spin w-8 h-8 border-2 rounded-full border-b-transparent"></div>}
 
-      <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center gap-6">
+      <div id="ocorrenciaDiv" className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center gap-6">
         <img
           src={pessoa.urlFoto}
           alt={pessoa.nome}
@@ -154,9 +165,12 @@ export default function PessoaDetalhes() {
           <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">
             <FaShareAlt /> Compartilhar
           </button>
-          <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">
+          <button onClick={handleOpenModal} className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">
             Enviar informação
           </button>
+          <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+            <OcorrenciaModal pessoaId={pessoa.id} onClose={handleCloseModal} /> 
+          </Modal>
         </div>
       </div>
     </div>

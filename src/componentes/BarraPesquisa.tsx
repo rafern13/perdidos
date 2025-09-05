@@ -31,6 +31,7 @@ export function BarraPesquisa({ onSearch }: Prop) {
             <TextoInput
                 label="Nome"
                 value={filtros.nome}
+                validacaoRegex={/^([A-z]|\s)*$/}
                 onChange={(value) => setFiltros(prevFiltros => ({...prevFiltros, nome: value}))}
             />
             <NumberInput

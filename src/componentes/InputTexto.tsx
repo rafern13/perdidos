@@ -2,19 +2,21 @@ import React, { useState } from "react";
 import type { TextInputProps } from "../tipos";
 
 
-export function TextoInput({ label, placeholder, value, onChange }: TextInputProps) {
+export function TextoInput({ validacaoRegex, label, placeholder, value: initialValue, onChange }: TextInputProps) {
+    const [value, setValue] = useState(initialValue)
     const [isInvalid, setIsInvalid] = useState(false);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = e.target.value;
-        const containsNumber = /\d/.test(newValue); 
-        if (containsNumber) {
+
+        const valid = validacaoRegex?.test(newValue);
+        if (validacaoRegex && !valid) {
             setIsInvalid(true);
             return;
         }
 
-        setIsInvalid(false);
-        onChange(newValue);
+        setValue(newValue)
+        onChange(newValue)
     };
 
     return (

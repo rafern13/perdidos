@@ -88,6 +88,7 @@ export type TextInputProps = {
     label: string;
     value: string;
     placeholder?: string,
+    validacaoRegex?: RegExp;
     onChange: (value: string) => void;
 }
 
@@ -95,4 +96,13 @@ export type DataInputProps = {
   value: string,
   label: string,
   onChange: (value: string) => void,
+}
+
+export type Ocorrencia = {
+  ocoId: number,
+  informacao: string, 
+  descricao: string,
+  data: string,
+  id: number,
+  anexos: string[],
 }

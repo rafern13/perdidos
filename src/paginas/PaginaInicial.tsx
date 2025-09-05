@@ -12,7 +12,7 @@ export default function Componente() {
     
     useEffect(() => {
         setisLoading(true);
-        const params = new URLSearchParams();
+        const params = new URLSearchParams();   
         params.append("registros", "5");
 
         const query = `https://abitus-api.geia.vip/v1/pessoas/aberto/dinamico?${params.toString()}`

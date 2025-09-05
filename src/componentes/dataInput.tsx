@@ -15,7 +15,7 @@ export function DataInput({value, label, onChange}: DataInputProps) {
             <input 
                 type="date"
                 value={value}
-                className="p-2 border rounded-md bg-white"
+                className="p-2 border w-40 rounded-md bg-white"
                 onChange={handleDataChange}
             />
             <p className="text-red-500 text-sm mt-1 transition-opacity duration-300 opacity-0">
