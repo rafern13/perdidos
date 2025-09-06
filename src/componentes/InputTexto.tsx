@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import type { TextInputProps } from "../tipos";
 
-
-export function TextoInput({ validacaoRegex, label, placeholder, value: initialValue, onChange }: TextInputProps) {
-    const [value, setValue] = useState(initialValue)
+export function TextoInput({ validacaoRegex, label, placeholder, value, onChange }: TextInputProps) {
     const [isInvalid, setIsInvalid] = useState(false);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,8 +13,9 @@ export function TextoInput({ validacaoRegex, label, placeholder, value: initialV
             return;
         }
 
-        setValue(newValue)
-        onChange(newValue)
+        setIsInvalid(false);
+        
+        onChange(newValue);
     };
 
     return (
@@ -31,7 +30,7 @@ export function TextoInput({ validacaoRegex, label, placeholder, value: initialV
                 onChange={handleInputChange}
             />
             <p className={`text-red-500 text-sm mt-1 transition-opacity duration-300 ${isInvalid ? "opacity-100" : "opacity-0"}`}>
-                Somente caractéres.
+                Somente caracteres.
             </p>
         </div>
     );
