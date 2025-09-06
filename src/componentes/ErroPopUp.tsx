@@ -19,12 +19,10 @@ export default function MensagemPopUp({ mensagem, erro, setMensagemReq }: Props)
             setIsShowing(true);
 
             const fadeOutTimer = setTimeout(() => {
-                console.log("Fading out error message");
                 setIsShowing(false);
             }, 2500);
 
             const clearErrorTimer = setTimeout(() => {
-                console.log("Clearing error message");
                 setMensagemReq("");
             }, 3000);
 

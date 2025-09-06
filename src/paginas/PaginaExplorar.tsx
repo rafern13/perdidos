@@ -3,12 +3,14 @@ import { Header } from "../componentes/Header";
 import PessoaCard from "../componentes/CartaoPessoaDesaparecida";
 import type { Pessoa } from "../tipos";
 import EsqueletoCard from "../componentes/EsqueletoCard";
+import { MdRefresh } from "react-icons/md";
 
 export default function Component() {
   const [pessoas, setPessoas] = useState<Pessoa[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const mostrarMaisPessoas = async () => {
+    setPessoas([]);
     setIsLoading(true);
 
     //optei por fazer a requisição guardar todos pois este endpoint não tem paginação
@@ -65,6 +67,7 @@ export default function Component() {
             disabled={isLoading}
             className="bg-blue-700 hover:bg-blue-900 text-white font-bold py-3 px-6 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
           >
+            <MdRefresh className="inline-block mr-2" />
             {isLoading ? "Atualizando..." : "Atualizar Lista"}
           </button>
         </div>

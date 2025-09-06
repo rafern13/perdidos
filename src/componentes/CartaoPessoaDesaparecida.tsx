@@ -3,6 +3,7 @@ import type { Pessoa } from "../tipos";
 import { Link } from "react-router-dom";
 import placeholderImg from "@/assets/placeholder.jpg";
 import templateImg from "@/assets/template.png";
+import { MdInfoOutline } from "react-icons/md";
 
 export default function PessoaCard({ pessoa }: { pessoa: Pessoa }) {
   const [loading, setLoading] = useState(true);
@@ -51,8 +52,12 @@ export default function PessoaCard({ pessoa }: { pessoa: Pessoa }) {
           Último local: {pessoa.ultimaOcorrencia.localDesaparecimentoConcat}
         </p>
       </div>
-      <div className="bottom-4 relative right-2 text-right w-full ">
-        <Link to={`/ocorrencia/${pessoa.id}`} className="w-full bg-blue-600 text-white py-1 px-1 md:p-3 rounded-xl mb-2 hover:bg-blue-700">
+      <div className="bottom-4 relative right-2 text-right w-full flex justify-end items-center gap-2">
+        <Link
+          to={`/ocorrencia/${pessoa.id}`}
+          className="flex items-center gap-2 bg-blue-600 text-white py-1 px-3 rounded-xl mb-2 hover:bg-blue-700 transition"
+        >
+          <MdInfoOutline size={18} />
           Ver Detalhes
         </Link>
       </div>

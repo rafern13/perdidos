@@ -1,3 +1,4 @@
+import { FaCompass, FaHome } from "react-icons/fa";
 import { Link } from "react-router-dom"; 
 
 export function Header() {
@@ -10,12 +11,14 @@ export function Header() {
                 <nav>
                     <ul className="flex space-x-10 mr-2">
                         <li>
-                            <Link to="/" className="hover:text-gray-200 transition-colors duration-200">
+                            <Link to="/" className="hover:text-gray-200 flex flex-row justify-center gap-2 items-center my-auto transition-colors duration-200">
+                                <FaHome />
                                 Início
                             </Link>
                         </li>
                         <li>
-                            <Link to="/explorar" className="hover:text-gray-200 transition-colors duration-200">
+                            <Link to="/explorar" className="hover:text-gray-200 flex flex-row justify-center gap-2 items-center my-auto transition-colors duration-200">
+                                <FaCompass />
                                 Explorar
                             </Link>
                         </li>

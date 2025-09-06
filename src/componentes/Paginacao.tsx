@@ -1,3 +1,4 @@
+import { FaGreaterThan, FaLessThan } from "react-icons/fa";
 
 interface PaginacaoProps {
     totalPaginas: number,
@@ -14,8 +15,9 @@ export default function Paginacao({totalPaginas, paginaAtual, onPageChange}:  Pa
                 <button
                   onClick={() => onPageChange(paginaAtual - 1)}
                   disabled={paginaAtual === 0}
-                  className={`px-3 py-2 leading-tight text-gray-700 bg-white border border-gray-500 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 ${paginaAtual === 0 ? "cursor-not-allowed opacity-50" : ""}`}
+                  className={`px-3 py-2 leading-tight flex justify-center gap-2 items-center text-gray-700 bg-white border border-gray-500 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 ${paginaAtual === 0 ? "cursor-not-allowed opacity-50" : ""}`}
                 >
+                  <FaLessThan/>
                   Anterior
                 </button>
               </li>
@@ -24,9 +26,10 @@ export default function Paginacao({totalPaginas, paginaAtual, onPageChange}:  Pa
                 <button
                   onClick={() => onPageChange(paginaAtual + 1)}
                   disabled={paginaAtual === totalPaginas - 1}
-                  className={`px-3 py-2 leading-tight text-gray-700 bg-white border border-gray-500 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 ${paginaAtual === totalPaginas - 1 ? "cursor-not-allowed opacity-50" : ""}`}
+                  className={`px-3 py-2 leading-tight flex justify-center gap-2 items-center text-gray-700 bg-white border border-gray-500 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 ${paginaAtual === totalPaginas - 1 ? "cursor-not-allowed opacity-50" : ""}`}
                 >
                   Próxima
+                  <FaGreaterThan/>
                 </button>
               </li>
             </ul>

@@ -1,14 +1,22 @@
+import { useEffect, useState } from "react";
 import type { DataInputProps } from "../tipos";
 
 export function DataInput({value, label, onChange}: DataInputProps) {
+    const [data, setData] = useState(value);
+
+    useEffect(() => {
+        if (data === "") {
+            setData(obterDataFormatada());
+            onChange(obterDataFormatada());
+        }
+
+    }, [data])
     
     const handleDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         onChange(e.target.value);
     };
     
     const dataDeHoje = obterDataFormatada();
-
-    console.log(value === "" ? dataDeHoje : value)
 
     return (
         <div className="flex flex-col justify-normal mb-1">

@@ -3,6 +3,9 @@ import type { FiltrosPesquisa } from "../tipos";
 import { NumberInput } from "./NumberInput"; 
 import { SelectInput } from "./SelectInput";
 import { TextoInput } from "./InputTexto";
+import { FaFilter } from "react-icons/fa";
+import { FcClearFilters } from "react-icons/fc";
+import { FaFilterCircleXmark } from "react-icons/fa6";
 
 type Prop = {
     onSearch: (filtros: FiltrosPesquisa) => void;
@@ -57,8 +60,9 @@ export function BarraPesquisa({ onSearch }: Prop) {
                 </label>
                 <button
                     onClick={handleSearchClick}
-                    className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+                    className="bg-blue-500 flex justify-center gap-2 items-center text-white p-2 rounded-md hover:bg-blue-600"
                 >
+                    <FaFilter className="inline mr-2" />
                     Filtrar
                 </button>
                 <p className="text-red-500 text-sm mt-1 transition-opacity duration-300 opacity-0">
@@ -78,6 +82,7 @@ export function BarraPesquisa({ onSearch }: Prop) {
                     })}
                     className="bg-gray-300 text-black p-2 rounded-md hover:bg-gray-400"
                 >
+                    <FcClearFilters className="inline mr-2" />
                     Limpar Filtro
                 </button>
                 <p className="text-red-500 text-sm mt-1 transition-opacity duration-300 opacity-0">

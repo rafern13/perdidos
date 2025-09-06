@@ -4,6 +4,7 @@ import { TextoInput } from "./InputTexto";
 import { DataInput } from "./dataInput";
 import InputAnexo from "./AnexoInput";
 import MensagemPopUp from "./ErroPopUp";
+import { FaDoorClosed, FaRegWindowClose, FaSave, FaWindowClose } from "react-icons/fa";
 
 type modalProps = {
     pessoa: Pessoa;
@@ -145,12 +146,14 @@ export default function OcorrenciaModal({ pessoa, onClose }: modalProps) {
         </div>
       </div>
 
-      <div className="flex justify-end items-baseline gap-2 mt-auto">
+      <div className="flex justify-end items-center gap-2 mt-auto">
         <button
           onClick={onClose}
-          className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+          className="bg-gray-500 flex justify-center gap-2 items-center text-white px-4 py-2 rounded hover:bg-gray-600"
           disabled={isSaving}
         >
+          <FaRegWindowClose className="inline mr-2" />
+
           Cancelar
         </button>
         <button
@@ -161,11 +164,12 @@ export default function OcorrenciaModal({ pessoa, onClose }: modalProps) {
 
             submitar();
           }}
-          className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ${
+          className={`bg-blue-500 flex justify-center gap-2 items-center text-white px-4 py-2 rounded hover:bg-blue-600 ${
             isSaving ? "opacity-50 cursor-not-allowed" : ""
           }`}
           disabled={isSaving}
         >
+          <FaSave className="inline mr-2" />
           {isSaving ? "Salvando..." : "Salvar"}
         </button>
       </div>

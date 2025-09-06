@@ -7,6 +7,7 @@ import OcorrenciaModal from "../componentes/CadastroOcorrenciaModal";
 import MensagemPopUp from "@/componentes/ErroPopUp";
 import placeholderImg from "@/assets/placeholder.jpg";
 import templateImg from "@/assets/template.png";
+import { MdSend } from "react-icons/md";
 
 
 
@@ -49,6 +50,15 @@ export default function PessoaDetalhes() {
     setIsModalOpen(false);
   }
 
+  const copiarUrl = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setMensagemReq({ mensagem: "Link copiado para a área de transferência!", erro: false }); 
+    } catch {
+      setMensagemReq({ mensagem: "Falha ao copiar o link.", erro: true }); 
+    }
+  };
+
   useEffect(() => {
       setisLoading(true);
       fetch(`https://abitus-api.geia.vip/v1/pessoas/${id}`)
@@ -76,7 +86,7 @@ export default function PessoaDetalhes() {
       <div className="flex items-center mb-6">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-gray-700 hover:text-gray-900"
+          className="flex cursor-pointer items-center gap-2 text-gray-700 hover:text-gray-900"
         >
           <FaArrowLeft /> Voltar
         </button>
@@ -178,10 +188,11 @@ export default function PessoaDetalhes() {
         )}
 
         <div className="flex gap-4 mt-6">
-          <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">
+          <button onClick={copiarUrl} className="flex cursor-pointer items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">
             <FaShareAlt /> Compartilhar
           </button>
-          <button onClick={handleOpenModal} className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">
+          <button onClick={handleOpenModal} className="px-4 py-2 flex justify-center gap-2 items-center cursor-pointer border border-gray-400 rounded-lg hover:bg-gray-400">
+            <MdSend size={20}/>
             Enviar informação
           </button>
           <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
