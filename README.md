@@ -1,69 +1,44 @@
-# React + TypeScript + Vite
+# Perdidos - Banco de Pessoas Desaparecidas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é o repositório do frontend para a aplicação **Perdidos**, uma plataforma para visualizar, buscar e filtrar informações sobre pessoas desaparecidas.
 
-Currently, two official plugins are available:
+* Nome: Rafael Fernandes do Carmo
+* E-mail: rafafernandes1308@gmail.com
+* Telefone: 15 99623-4146
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✅ Pré-requisitos
 
-## Expanding the ESLint configuration
+Antes de começar, você vai precisar ter as seguintes ferramentas instaladas em sua máquina:
+* [Git](https://git-scm.com/)
+* [Docker](https://www.docker.com/)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ⚙️ Instalação e Execução
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Siga os passos abaixo para rodar o projeto localmente.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+1.  **Clone o repositório:**
+    ```bash
+      git clone https://github.com/rafern13/perdidos.git
+    ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2.  **Navegue até o diretório do projeto:**
+    ```bash
+    cd perdidos
+    ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+3.  **Construa o Container:**
+    ```
+    # Build do projeto
+    docker build -t perdidos-frontend .
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+    # Start no container
+    docker run -p 8080:80 perdidos-frontend
+    ```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+4.  Abra seu navegador e acesse [`http://localhost:8080`](http://localhost:8080) (ou a porta que for indicada no seu terminal).
+
+## 📦 **Como utilizar**
+   A api permite visualizar as pessoas atráves do filtro ou do explorar, no qual são carregados registros aleatórios
+
+### Adicionando informações
+   Nos detalhes do card, o usuário pode decidir postar informações a respeito da pessoa desaparecida.
