@@ -134,7 +134,7 @@ export default function PaginaInicialRefatorada() {
           </div>
           <Link
             to="/explorar"
-            className="bg-white hover:bg-gray-100 text-black border-2 p-2 rounded-lg mt-3 flex items-center gap-2"
+            className="bg-white w-28 hover:bg-gray-100 text-black border-2 p-2 rounded-lg mt-3 flex items-center gap-2"
           >
             <FaCompass />
             <span>Explorar</span>
@@ -166,7 +166,7 @@ export default function PaginaInicialRefatorada() {
         </div>
 
         {isLoading && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 mr-4">
             {[...Array(10)].map((_, index) => (
               <EsqueletoCard key={index} />
             ))}
@@ -176,7 +176,7 @@ export default function PaginaInicialRefatorada() {
         {!isLoading && pessoas && (
           <>
             {pessoas.content.length > 0 ? (
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:gap-10 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:gap-10 gap-3 mr-5">
                 {pessoas.content.map((pessoa: Pessoa) => (
                   <PessoaCard key={pessoa.id} pessoa={pessoa} />
                 ))}

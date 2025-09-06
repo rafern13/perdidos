@@ -9,13 +9,6 @@ const router = createBrowserRouter([
     },  
   },
   {
-    path: "/pesquisa",
-    lazy: async () => {
-      const module = await import("./paginas/PaginaPesquisar");
-      return { Component: module.default };
-    },  
-  },
-  {
     path: "/ocorrencia/:id",
     lazy: async () => {
         const module = await import("./paginas/PaginaOcorrencia");

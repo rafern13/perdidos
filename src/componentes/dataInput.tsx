@@ -8,6 +8,8 @@ export function DataInput({value, label, onChange}: DataInputProps) {
     
     const dataDeHoje = obterDataFormatada();
 
+    console.log(value === "" ? dataDeHoje : value)
+
     return (
         <div className="flex flex-col justify-normal mb-1">
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -15,7 +17,7 @@ export function DataInput({value, label, onChange}: DataInputProps) {
             </label>
             <input 
                 type="date"
-                value={value || dataDeHoje}
+                value={value === "" ? dataDeHoje : value}
                 className="p-2 border w-40 rounded-md bg-white"
                 onChange={handleDataChange}
             />
@@ -28,7 +30,6 @@ export function DataInput({value, label, onChange}: DataInputProps) {
 
 function obterDataFormatada() {
     const hoje = new Date();
-  
     const dia = hoje.getDate();
     const mes = hoje.getMonth() + 1;
     const ano = hoje.getFullYear();
@@ -36,6 +37,7 @@ function obterDataFormatada() {
     const diaFormatado = String(dia).padStart(2, "0");
     const mesFormatado = String(mes).padStart(2, "0");
   
-    return `${diaFormatado}-${mesFormatado}-${ano}`;
-}
+    return `${ano}-${mesFormatado}-${diaFormatado}`; 
+  }
+  
   

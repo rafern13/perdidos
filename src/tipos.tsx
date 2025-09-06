@@ -1,32 +1,32 @@
 export type Cartaz = {
-    urlCartaz: string;
-    tipoCartaz: string; 
-  };
-  
-  export type OcorrenciaEntrevDesapDTO = {
-    informacao: string;
-    vestimentasDesaparecido: string;
-  };
-  
-  export type UltimaOcorrencia = {
-    dtDesaparecimento: string; 
-    dataLocalizacao: string;   
-    encontradoVivo: boolean;
-    localDesaparecimentoConcat: string;
-    ocorrenciaEntrevDesapDTO: OcorrenciaEntrevDesapDTO;
-    listaCartaz: Cartaz[];
-    ocoId: number;
-  };
-  
-  export type Pessoa = {
-    id: number;
-    nome: string;
-    idade: number;
-    sexo: "MASCULINO" | "FEMININO";
-    vivo: boolean;
-    urlFoto: string;
-    ultimaOcorrencia: UltimaOcorrencia;
-  };
+  urlCartaz: string;
+  tipoCartaz: string; 
+};
+
+export type OcorrenciaEntrevDesapDTO = {
+  informacao: string;
+  vestimentasDesaparecido: string;
+};
+
+export type UltimaOcorrencia = {
+  dtDesaparecimento: string; 
+  dataLocalizacao: string;   
+  encontradoVivo: boolean;
+  localDesaparecimentoConcat: string;
+  ocorrenciaEntrevDesapDTO: OcorrenciaEntrevDesapDTO;
+  listaCartaz: Cartaz[];
+  ocoId: number;
+};
+
+export type Pessoa = {
+  id: number;
+  nome: string;
+  idade: number;
+  sexo: "MASCULINO" | "FEMININO";
+  vivo: boolean;
+  urlFoto: string;
+  ultimaOcorrencia: UltimaOcorrencia;
+};
   
 
 export type SortObject = {

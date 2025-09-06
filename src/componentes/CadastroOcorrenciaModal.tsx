@@ -27,7 +27,24 @@ export default function OcorrenciaModal({ pessoa, onClose }: modalProps) {
     arquivo: new File([], ""),
   });
 
-  console.log(ocorrencia.ocoId)
+  const validar = () => {
+    if (!ocorrencia.informacao || ocorrencia.informacao.trim() === "") {
+      setMensagemReq({
+        mensagem: "O campo 'Informações' é obrigatório.",
+        erro: true,
+      });
+      return false;
+    }
+    if (!ocorrencia.data || ocorrencia.data.trim() === "") {
+      setMensagemReq({
+        mensagem: "O campo 'Data de avistamento' é obrigatório.",
+        erro: true,
+      });
+      return false;
+    }
+
+    return true;
+  };
 
   const submitar = async () => {
     setIsSaving(true);
@@ -137,7 +154,13 @@ export default function OcorrenciaModal({ pessoa, onClose }: modalProps) {
           Cancelar
         </button>
         <button
-          onClick={submitar}
+          onClick={() => {
+            if (!validar()) { 
+              return;
+            }
+
+            submitar();
+          }}
           className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ${
             isSaving ? "opacity-50 cursor-not-allowed" : ""
           }`}
