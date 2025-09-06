@@ -1,66 +1,71 @@
-import { useState } from "react";
-import type { MensagemProps, Ocorrencia } from "../tipos";
+import { useEffect, useState } from "react";
+import type { MensagemProps, Ocorrencia, Pessoa } from "../tipos";
 import { TextoInput } from "./InputTexto";
 import { DataInput } from "./dataInput";
 import InputAnexo from "./AnexoInput";
 import MensagemPopUp from "./ErroPopUp";
 
 type modalProps = {
-    pessoaId: number;
+    pessoa: Pessoa;
     onClose: () => void;
 }
 
-export default function OcorrenciaModal({ pessoaId, onClose }: modalProps) {
+export default function OcorrenciaModal({ pessoa, onClose }: modalProps) {
   const [isSaving, setIsSaving] = useState(false);
-  const [arquivo, setArquivo] = useState<File | File[] | null>(null);
   const [mensagemReq, setMensagemReq] = useState<MensagemProps>({
     mensagem: "",
     erro: false,
   });
 
   const [ocorrencia, setOcorrencia] = useState<Ocorrencia>({
-    ocoId: 0,
+    ocoId: pessoa.ultimaOcorrencia.ocoId,
     informacao: "",
     data: "",
     descricao: "",
-    id: pessoaId,
+    id: pessoa.id,
     anexos: [""],
+    arquivo: new File([], ""),
   });
+
+  console.log(ocorrencia.ocoId)
 
   const submitar = async () => {
     setIsSaving(true);
-    const params = new URLSearchParams();
-    params.append("id", pessoaId.toString());
-    params.append("informacao", ocorrencia.informacao);
-    params.append("data", ocorrencia.data);
-    params.append("descricao", ocorrencia.descricao);
-
+  
     try {
+      const req = "https://abitus-api.geia.vip/v1/ocorrencias/informacoes-desaparecido";
+  
       const formData = new FormData();
-
-      if (arquivo) {
-        if (Array.isArray(arquivo)) {
-          arquivo.forEach((file) => formData.append("anexos", file));
-        } else {
-          formData.append("anexos", arquivo);
-        }
+      formData.append("ocoId", String(ocorrencia.ocoId));
+      formData.append("informacao", ocorrencia.informacao);
+      formData.append("data", ocorrencia.data);
+      formData.append("descricao", ocorrencia.descricao);
+      formData.append("id", String(ocorrencia.id));
+  
+      if (ocorrencia.arquivo && ocorrencia.arquivo.size > 0) {
+        formData.append("arquivo", ocorrencia.arquivo);
       }
-
-      const req = `https://abitus-api.geia.vip/v1/ocorrencias/informacoes-desaparecido&${params.toString()}`
-      console.log(req)
-      const res = await fetch(
-        req,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-
-      if (!res.ok) throw new Error("Falha na requisição");
-
+  
+      const res = await fetch(req, {
+        method: "POST",
+        body: formData,
+      });
+  
+      if (!res.ok) {
+        throw new Error("Falha na requisição");
+      }
+      
       await res.json();
-      onClose();
-    } catch (error) {
+
+      setMensagemReq({
+        mensagem: "Ocorrência salva com sucesso!",
+        erro: false,
+      })
+
+      setTimeout(() => {
+        onClose();
+      }, 3000)
+    } catch (e) {
       setMensagemReq({
         mensagem: "Erro ao salvar ocorrência. Tente novamente.",
         erro: true,
@@ -69,6 +74,7 @@ export default function OcorrenciaModal({ pessoaId, onClose }: modalProps) {
       setIsSaving(false);
     }
   };
+  
 
   return (
     <div className="flex flex-col w-full p-4 h-full">
@@ -82,7 +88,14 @@ export default function OcorrenciaModal({ pessoaId, onClose }: modalProps) {
 
       <div className="flex justify-between gap-5 flex-col lg:flex-row-reverse mb-4 flex-grow">
         <InputAnexo
-          setArquivo={setArquivo}
+          setArquivo={(arquivo) => {
+            setArquivo(arquivo);
+            if (Array.isArray(arquivo)) {
+              setOcorrencia({ ...ocorrencia, arquivo: arquivo[0] });
+            } else if (arquivo) {
+              setOcorrencia({ ...ocorrencia, arquivo: arquivo });
+            }
+          }}
           label="Anexar arquivo"
           preview={true}
           previewWidth={200}

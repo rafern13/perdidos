@@ -188,7 +188,7 @@ export default function PessoaDetalhes() {
             Enviar informação
           </button>
           <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-            <OcorrenciaModal pessoaId={pessoa.id} onClose={handleCloseModal} /> 
+            <OcorrenciaModal pessoa={pessoa} onClose={handleCloseModal} /> 
           </Modal>
         </div>
       </div>
