@@ -6,8 +6,6 @@ interface PaginacaoProps {
 }
 
 export default function Paginacao({totalPaginas, paginaAtual, onPageChange}:  PaginacaoProps) {
-    const paginas = Array.from({ length: totalPaginas }, (_, i) => i);
-
     return (
         <div className="flex justify-center mt-6">
           <nav aria-label="Pagination">
@@ -16,7 +14,7 @@ export default function Paginacao({totalPaginas, paginaAtual, onPageChange}:  Pa
                 <button
                   onClick={() => onPageChange(paginaAtual - 1)}
                   disabled={paginaAtual === 0}
-                  className={`px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 ${paginaAtual === 0 ? "cursor-not-allowed opacity-50" : ""}`}
+                  className={`px-3 py-2 leading-tight text-gray-700 bg-white border border-gray-500 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 ${paginaAtual === 0 ? "cursor-not-allowed opacity-50" : ""}`}
                 >
                   Anterior
                 </button>
@@ -26,7 +24,7 @@ export default function Paginacao({totalPaginas, paginaAtual, onPageChange}:  Pa
                 <button
                   onClick={() => onPageChange(paginaAtual + 1)}
                   disabled={paginaAtual === totalPaginas - 1}
-                  className={`px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 ${paginaAtual === totalPaginas - 1 ? "cursor-not-allowed opacity-50" : ""}`}
+                  className={`px-3 py-2 leading-tight text-gray-700 bg-white border border-gray-500 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 ${paginaAtual === totalPaginas - 1 ? "cursor-not-allowed opacity-50" : ""}`}
                 >
                   Próxima
                 </button>

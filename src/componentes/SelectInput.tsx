@@ -25,7 +25,7 @@ export function SelectInput({ label, value, options, onChange }: SelectInputProp
                 ))}
             </select>
             <p className="text-red-500 text-sm mt-1 transition-opacity duration-300 opacity-0">
-                asdasdasdasdas
+                .
             </p>
         </div>
     );

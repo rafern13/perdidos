@@ -1,12 +1,19 @@
 import { useState } from "react";
 import type { Pessoa } from "../tipos";
+import { Link } from "react-router-dom";
+import placeholderImg from "@/assets/placeholder.jpg";
+import templateImg from "@/assets/template.png";
 
 export default function PessoaCard({ pessoa }: { pessoa: Pessoa }) {
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState(false);
 
+  const classesStatusVivo: string = pessoa.vivo ? "bg-green-600" : "bg-red-600";
+
+  const classesStatusDesaparecido: string = pessoa.ultimaOcorrencia.encontradoVivo ? "bg-green-600" : "bg-red-600";
+
   return (
-    <div className="bg-white w-full md:w-72 lg:w-80 shadow-lg overflow-hidden hover:shadow-xl rounded-b-lg mt-2 transition relative flex flex-col h-[420px]">
+    <div className="w-60 text-left border-black sm:w-60 md:w-64 lg:w-60 xl:w-64 shadow-lg overflow-hidden hover:shadow-xl rounded-lg mt-2 transition relative flex flex-col h-[440px]">
       <div className="relative w-full h-60">
         {loading && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
@@ -14,14 +21,21 @@ export default function PessoaCard({ pessoa }: { pessoa: Pessoa }) {
           </div>
         )}
 
+        <div  className={`absolute top-2 right-2  text-white text-xs font-bold px-2 py-1 rounded-full z-2 ${classesStatusVivo}`}>
+          {pessoa.vivo ? ("VIVO" ) : ( "FALECIDO" )}
+        </div>
+        <div  className={`absolute top-2 left-2  text-white text-xs font-bold px-2 py-1 rounded-full z-2 ${classesStatusDesaparecido}`}>
+          {pessoa.ultimaOcorrencia.encontradoVivo ? ("LOCALIZADO" ) : ( "DESAPARECIDO" )}
+        </div>
+
         <img
           src={
-            !erro
-              ? pessoa.urlFoto || "../assets/placeholder.jpg"
-              : "../assets/template.jpg" 
+            !erro && pessoa.urlFoto
+              ? pessoa.urlFoto || placeholderImg
+              : templateImg 
           }
           alt={pessoa.nome}
-          className={`w-full h-60 object-cover ${loading ? "hidden" : "block"}`}
+          className={`w-[95%] mx-auto mt-1 rounded-2xl h-60 object-cover ${loading ? "hidden" : "block"}`}
           onLoad={() => setLoading(false)}
           onError={() => {
             setErro(true);
@@ -31,17 +45,16 @@ export default function PessoaCard({ pessoa }: { pessoa: Pessoa }) {
       </div>
 
       <div className="p-4 flex flex-col flex-grow">
-        <h2 className="text-xl font-semibold">{pessoa.nome}</h2>
+        <h2 className="text-sm lg:text-lg font-semibold">{pessoa.nome}</h2>
         <p className="text-gray-600">Idade: {pessoa.idade}</p>
-        <p className="text-sm text-gray-500 mt-1 line-clamp-2">
+        <p className="text-sm text-gray-500 mt-1 mb-2 line-clamp-2">
           Último local: {pessoa.ultimaOcorrencia.localDesaparecimentoConcat}
         </p>
-
-        <div className="mt-auto">
-          <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700">
-            Ver Detalhes
-          </button>
-        </div>
+      </div>
+      <div className="bottom-3 relative right-2 text-right w-full ">
+        <Link to={`/ocorrencia/${pessoa.id}`} className="w-full bg-blue-600 text-white py-1 px-1 md:p-3 rounded-xl mb-2 hover:bg-blue-700">
+          Ver Detalhes
+        </Link>
       </div>
     </div>
   );

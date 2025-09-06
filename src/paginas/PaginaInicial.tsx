@@ -6,7 +6,12 @@ import EsqueletoCard from "../componentes/EsqueletoCard";
 import Paginacao from "../componentes/Paginacao"; 
 import type { FiltrosPesquisa, PagePessoaDto, Pessoa } from "../tipos";
 import { BarraPesquisa } from "../componentes/BarraPesquisa";
-import { PessoaCard } from "../componentes/CartaoPessoaDesaparecida";
+import PessoaCard from "../componentes/CartaoPessoaDesaparecida";
+
+type estatisticas = {
+    quantPessoasDesaparecidas: number;
+    quantPessoasEncontradas: number;
+}
 
 export default function PaginaInicialRefatorada() {
     const [pessoas, setPessoas] = useState<PagePessoaDto>();
@@ -19,6 +24,24 @@ export default function PaginaInicialRefatorada() {
     });
     const [paginacao, setPaginacao] = useState({ pagina: 0, tamanho: 12 });
     const [isOpen, setIsOpen] = useState(false);
+    const [estatisticas, setEstaticas] = useState<estatisticas>({
+        quantPessoasDesaparecidas: 0,
+        quantPessoasEncontradas: 0
+    });
+
+    useEffect(() => {
+        fetch("https://abitus-api.geia.vip/v1/pessoas/aberto/estatistico")
+        .then((res) => {
+            if (!res.ok) throw new Error("Falha na requisição");
+            return res.json();
+        })
+        .then((data: estatisticas) => {
+            setEstaticas(data);
+        })
+        .catch((err) => {
+            console.error("Erro ao buscar API:", err);
+        });
+    }, []);
 
     useEffect(() => {
         setisLoading(true);
@@ -72,8 +95,9 @@ export default function PaginaInicialRefatorada() {
             )}
 
             <aside
-                className={`fixed top-10 left-0 h-screen w-64 p-6 bg-white shadow-md z-5 transform transition-transform duration-300
-                ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
+                className={`fixed top-10 left-0 h-screen w-64 p-6 bg-white shadow-md z-10 transform transition-all duration-300
+                md:translate-x-0 md:opacity-100 md:pointer-events-auto
+                ${isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0 pointer-events-none"}`}
             >
                 <button
                     onClick={() => setIsOpen(false)}
@@ -83,12 +107,14 @@ export default function PaginaInicialRefatorada() {
                 </button>
 
                 <div className="flex flex-col gap-2 mt-8 md:mt-0">
-                    <h1 className="text-2xl font-bold">
-                        BANCO DE PESSOAS DESAPARECIDAS
-                    </h1>
-                    <p className="text-sm text-gray-600">
-                        Busque por pessoas desaparecidas ou contribua adicionando novas informações
-                    </p>
+                    <div>
+                        <h1 className="text-sm sm: text-2xl font-bold">
+                            BANCO DE PESSOAS DESAPARECIDAS
+                        </h1>
+                        <p className="text-[0.3rem] sm:text-sm text-gray-600">
+                            Busque por pessoas desaparecidas ou contribua adicionando novas informações
+                        </p>
+                    </div>
                     <Link
                         to="/explorar"
                         className="bg-white hover:bg-gray-100 text-black border-2 p-2 rounded-lg mt-3 flex items-center gap-2"
@@ -97,9 +123,24 @@ export default function PaginaInicialRefatorada() {
                         <span>Explorar</span>
                     </Link>
                 </div>
+                <div>
+                    <div className="mt-10 bg-gray-100 flex items-start flex-col rounded-lg">
+                        <h2 className="text-´3xl font-bold sm:text-1xl">Estatísticas</h2>
+                        <div className="flex flex-col mt-3 gap-3">
+                            <div className="flex justify-between flex-col">
+                                <span className="font-medium">Pessoas Desaparecidas</span>
+                                <span className="font-bold text-2xl">{estatisticas.quantPessoasDesaparecidas}</span>
+                            </div>
+                            <div className="flex justify-between flex-col">
+                                <span className="font-medium">Pessoas Encontradas</span>
+                                <span className="font-bold text-2xl">{estatisticas.quantPessoasEncontradas}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </aside>
 
-            <main className="ml-0 md:ml-64 p-6 transition-all duration-300 mt-8">
+            <main className="ml-0 md:ml-64 p-6 transition-all duration-300 mt-0 sm:mt-6">
                 <div className="sticky top-0 p-4 bg-white rounded-lg shadow-md mb-6">
                     <div className="relative">
                         <BarraPesquisa onSearch={handleSearch} />
@@ -107,7 +148,7 @@ export default function PaginaInicialRefatorada() {
                 </div>
 
                 {isLoading ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  2xl:grid-cols-5 gap-3">
                         {[...Array(10)].map((_, index) => (
                             <EsqueletoCard key={index} />
                         ))}
@@ -115,7 +156,7 @@ export default function PaginaInicialRefatorada() {
                 ) : (
                     <>
                         {pessoas.content.length > 0 ? (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4    gap-5">
+                            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  2xl:grid-cols-5 gap-3">
                                 {pessoas?.content.map((pessoa: Pessoa) => (
                                     <PessoaCard key={pessoa.id} pessoa={pessoa} />
                                 ))}

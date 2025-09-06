@@ -61,7 +61,7 @@ export default function PessoaDetalhes() {
     }, [id]);
 
   return (
-    <div className="max-w-4xl mx-auto py-10 px-4">
+    <div className="max-w-4xl rounded-2xl mt-1 border border-gray-600 mx-auto py-5 px-4">
       <div className="flex items-center mb-6">
         <button
           onClick={() => navigate(-1)}
