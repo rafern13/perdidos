@@ -1,5 +1,6 @@
 import type { DataInputProps } from "../tipos";
 
+const dataDeHoje = obterDataFormatada();
 
 export function DataInput({value, label, onChange}: DataInputProps) {
 
@@ -14,7 +15,7 @@ export function DataInput({value, label, onChange}: DataInputProps) {
             </label>
             <input 
                 type="date"
-                value={value}
+                value={value || dataDeHoje}
                 className="p-2 border w-40 rounded-md bg-white"
                 onChange={handleDataChange}
             />
@@ -24,3 +25,17 @@ export function DataInput({value, label, onChange}: DataInputProps) {
         </div>
     )
 }
+
+function obterDataFormatada() {
+    const hoje = new Date();
+  
+    const dia = hoje.getDate();
+    const mes = hoje.getMonth() + 1;
+    const ano = hoje.getFullYear();
+  
+    const diaFormatado = String(dia).padStart(2, "0");
+    const mesFormatado = String(mes).padStart(2, "0");
+  
+    return `${diaFormatado}-${mesFormatado}-${ano}`;
+  }
+  

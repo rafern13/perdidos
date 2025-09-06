@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import type { Pessoa, Ocorrencia } from "../tipos";
+import type { Pessoa } from "../tipos";
 import { FaArrowLeft, FaShareAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import Modal from "../componentes/Modal";

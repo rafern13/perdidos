@@ -21,18 +21,7 @@ export default function Paginacao({totalPaginas, paginaAtual, onPageChange}:  Pa
                   Anterior
                 </button>
               </li>
-              
-              {/* {paginas.map((pageNumber) => (
-                <li className="w-3/5" key={pageNumber}>
-                  <button
-                    onClick={() => onPageChange(pageNumber)}
-                    className={`px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 ${pageNumber === paginaAtual ? "z-10 text-blue-600 bg-blue-50 border-blue-300" : ""}`}
-                  >
-                    {pageNumber + 1}
-                  </button>
-                </li>
-              ))} */}
-    
+            
               <li>
                 <button
                   onClick={() => onPageChange(paginaAtual + 1)}

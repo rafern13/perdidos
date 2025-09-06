@@ -1,4 +1,3 @@
-import Slider from "react-slick";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { PessoaCard } from "./CartaoPessoaDesaparecida";
 import type { Pessoa } from "../tipos";

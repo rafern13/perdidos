@@ -17,7 +17,7 @@ export default function PaginaInicialRefatorada() {
         faixaIdadeFinal: "",
         status: "",
     });
-    const [paginacao, setPaginacao] = useState({ pagina: 0, tamanho: 10 });
+    const [paginacao, setPaginacao] = useState({ pagina: 0, tamanho: 12 });
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
