@@ -4,7 +4,7 @@ import { TextoInput } from "./InputTexto";
 import { DataInput } from "./dataInput";
 import InputAnexo from "./AnexoInput";
 import MensagemPopUp from "./ErroPopUp";
-import { FaDoorClosed, FaRegWindowClose, FaSave, FaWindowClose } from "react-icons/fa";
+import { FaRegWindowClose, FaSave } from "react-icons/fa";
 
 type modalProps = {
     pessoa: Pessoa;

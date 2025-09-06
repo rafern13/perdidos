@@ -5,7 +5,6 @@ import { SelectInput } from "./SelectInput";
 import { TextoInput } from "./InputTexto";
 import { FaFilter } from "react-icons/fa";
 import { FcClearFilters } from "react-icons/fc";
-import { FaFilterCircleXmark } from "react-icons/fa6";
 
 type Prop = {
     onSearch: (filtros: FiltrosPesquisa) => void;

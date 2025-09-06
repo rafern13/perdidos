@@ -78,6 +78,12 @@ export default function PaginaInicialRefatorada() {
       });
   }, [filters, paginacao]);
 
+  useEffect(() => {
+    if (!isLoading) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [isLoading]);
+
   const handleSearch = (newFilters: FiltrosPesquisa) => {
     setFilters(newFilters);
     setPaginacao({ ...paginacao, pagina: 0 });
