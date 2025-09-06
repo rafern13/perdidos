@@ -1,18 +1,26 @@
 import { useParams, useNavigate } from "react-router-dom";
-import type { Pessoa } from "../tipos";
+import type { MensagemProps, Pessoa } from "../tipos";
 import { FaArrowLeft, FaShareAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import Modal from "../componentes/Modal";
 import OcorrenciaModal from "../componentes/CadastroOcorrenciaModal";
 import MensagemPopUp from "@/componentes/ErroPopUp";
+import placeholderImg from "@/assets/placeholder.jpg";
+import templateImg from "@/assets/template.png";
+
 
 
 export default function PessoaDetalhes() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [isLoading, setisLoading] = useState(false);
+  const [isImageLoading, setIsImageLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [erroReq, setErroReq] = useState<string>("");
+  const [mensagemReq, setMensagemReq] = useState<MensagemProps>({
+    mensagem: "",
+    erro: false,
+  });
+  const [erro, setErro] = useState(false);
   const [pessoa, setPessoa] = useState<Pessoa>({
     "id": 0,
     "nome": "",
@@ -56,7 +64,7 @@ export default function PessoaDetalhes() {
           setisLoading(false);
         })
         .catch(() => {
-          setErroReq("Erro ao buscar os detalhes da pessoa");
+          setMensagemReq({ mensagem: "Erro ao buscar os dados da pessoa", erro: true });
           setisLoading(false);
         });
          
@@ -64,7 +72,8 @@ export default function PessoaDetalhes() {
 
   return (
     <div className="max-w-4xl rounded-2xl mt-1 border border-gray-600 mx-auto py-5 px-4">
-      <MensagemPopUp erroReq={erroReq} setErroReq={setErroReq} />
+      <MensagemPopUp mensagem={mensagemReq.mensagem} erro={false} setMensagemReq={(mensagem) => setMensagemReq({ mensagem, erro: false })}
+ />
       <div className="flex items-center mb-6">
         <button
           onClick={() => navigate(-1)}
@@ -78,8 +87,15 @@ export default function PessoaDetalhes() {
 
       <div id="ocorrenciaDiv" className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center gap-6">
         <img
-          src={pessoa.urlFoto}
+          src={!erro && pessoa.urlFoto
+            ? pessoa.urlFoto || placeholderImg
+            : templateImg }
           alt={pessoa.nome}
+          onLoad={() => setIsImageLoading(false)}
+          onError={() => {
+            setIsImageLoading(false);
+            setErro(true);
+          }}
           className="w-48 h-48 object-cover rounded-2xl shadow-md"
         />
 
