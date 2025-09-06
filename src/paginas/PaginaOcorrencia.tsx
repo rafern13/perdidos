@@ -14,7 +14,6 @@ export default function PessoaDetalhes() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [isLoading, setisLoading] = useState(false);
-  const [isImageLoading, setIsImageLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [mensagemReq, setMensagemReq] = useState<MensagemProps>({
     mensagem: "",
@@ -91,9 +90,7 @@ export default function PessoaDetalhes() {
             ? pessoa.urlFoto || placeholderImg
             : templateImg }
           alt={pessoa.nome}
-          onLoad={() => setIsImageLoading(false)}
           onError={() => {
-            setIsImageLoading(false);
             setErro(true);
           }}
           className="w-48 h-48 object-cover rounded-2xl shadow-md"

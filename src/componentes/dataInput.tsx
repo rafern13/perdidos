@@ -1,12 +1,12 @@
 import type { DataInputProps } from "../tipos";
 
-const dataDeHoje = obterDataFormatada();
-
 export function DataInput({value, label, onChange}: DataInputProps) {
-
+    
     const handleDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-            onChange(e.target.value);
-        };
+        onChange(e.target.value);
+    };
+    
+    const dataDeHoje = obterDataFormatada();
 
     return (
         <div className="flex flex-col justify-normal mb-1">
@@ -37,5 +37,5 @@ function obterDataFormatada() {
     const mesFormatado = String(mes).padStart(2, "0");
   
     return `${diaFormatado}-${mesFormatado}-${ano}`;
-  }
+}
   

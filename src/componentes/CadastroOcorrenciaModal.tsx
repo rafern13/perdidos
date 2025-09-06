@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { MensagemProps, Ocorrencia, Pessoa } from "../tipos";
 import { TextoInput } from "./InputTexto";
 import { DataInput } from "./dataInput";
@@ -65,7 +65,7 @@ export default function OcorrenciaModal({ pessoa, onClose }: modalProps) {
       setTimeout(() => {
         onClose();
       }, 3000)
-    } catch (e) {
+    } catch {
       setMensagemReq({
         mensagem: "Erro ao salvar ocorrência. Tente novamente.",
         erro: true,
@@ -89,7 +89,6 @@ export default function OcorrenciaModal({ pessoa, onClose }: modalProps) {
       <div className="flex justify-between gap-5 flex-col lg:flex-row-reverse mb-4 flex-grow">
         <InputAnexo
           setArquivo={(arquivo) => {
-            setArquivo(arquivo);
             if (Array.isArray(arquivo)) {
               setOcorrencia({ ...ocorrencia, arquivo: arquivo[0] });
             } else if (arquivo) {
