@@ -27,7 +27,7 @@ export function BarraPesquisa({ onSearch }: Prop) {
     ];
 
     return (
-        <div className="flex sticky flex-col md:flex-row justify-center items-baseline flex-wrap gap-4 p-4 bg-gray-100  rounded-lg shadow-md">
+        <div className="flex sticky flex-col md:flex-row justify-center items-baseline flex-wrap gap-4 p-1 bg-gray-100  rounded-lg shadow-md">
             <TextoInput
                 label="Nome"
                 value={filtros.nome}
