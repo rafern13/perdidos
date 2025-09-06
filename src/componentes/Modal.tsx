@@ -1,4 +1,3 @@
-// src/components/Modal.js
 import React, { useEffect, useState } from "react"; 
 import ReactDOM from "react-dom";
 
@@ -25,7 +24,7 @@ const Modal = ({ children, isOpen, onClose }: ModalProps) => {
 
   return ReactDOM.createPortal(
     <div 
-      className="fixed inset-0 z-40 bg-black/50 backdrop-blur-md flex items-center justify-center" 
+      className="fixed inset-0 z-40 bg-black/80 backdrop-blur-md flex items-center justify-center" 
       onClick={onClose}
     >
         <div 

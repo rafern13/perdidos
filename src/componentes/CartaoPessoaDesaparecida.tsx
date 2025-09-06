@@ -13,7 +13,7 @@ export default function PessoaCard({ pessoa }: { pessoa: Pessoa }) {
   const classesStatusDesaparecido: string = pessoa.ultimaOcorrencia.encontradoVivo ? "bg-green-600" : "bg-red-600";
 
   return (
-    <div className="w-60 text-left border-black sm:w-60 md:w-64 lg:w-60 xl:w-64 shadow-lg overflow-hidden hover:shadow-xl rounded-lg mt-2 transition relative flex flex-col h-[440px]">
+    <div className="w-60 text-left border-black sm:w-60 md:w-64 lg:w-60 xl:w-64 shadow-gray-500 overflow-hidden hover:shadow-xl rounded-lg mt-2 transition relative flex flex-col h-[440px]">
       <div className="relative w-full h-60">
         {loading && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
@@ -51,7 +51,7 @@ export default function PessoaCard({ pessoa }: { pessoa: Pessoa }) {
           Último local: {pessoa.ultimaOcorrencia.localDesaparecimentoConcat}
         </p>
       </div>
-      <div className="bottom-3 relative right-2 text-right w-full ">
+      <div className="bottom-4 relative right-2 text-right w-full ">
         <Link to={`/ocorrencia/${pessoa.id}`} className="w-full bg-blue-600 text-white py-1 px-1 md:p-3 rounded-xl mb-2 hover:bg-blue-700">
           Ver Detalhes
         </Link>

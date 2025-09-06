@@ -1,8 +1,9 @@
 import { useState } from "react";
-import type { Ocorrencia } from "../tipos";
+import type { MensagemProps, Ocorrencia } from "../tipos";
 import { TextoInput } from "./InputTexto";
 import { DataInput } from "./dataInput";
 import InputAnexo from "./AnexoInput";
+import MensagemPopUp from "./ErroPopUp";
 
 type modalProps = {
     pessoaId: number;
@@ -11,8 +12,11 @@ type modalProps = {
 
 export default function OcorrenciaModal({ pessoaId, onClose }: modalProps) {
   const [isSaving, setIsSaving] = useState(false);
-  const [isError, setIsError] = useState(false);
   const [arquivo, setArquivo] = useState<File | File[] | null>(null);
+  const [mensagemReq, setMensagemReq] = useState<MensagemProps>({
+    mensagem: "",
+    erro: false,
+  });
 
   const [ocorrencia, setOcorrencia] = useState<Ocorrencia>({
     ocoId: 0,
@@ -56,10 +60,11 @@ export default function OcorrenciaModal({ pessoaId, onClose }: modalProps) {
 
       await res.json();
       onClose();
-    } catch (err) {
-      console.error("Erro ao buscar API:", err);
-      setIsError(true);
-      setTimeout(() => setIsError(false), 3000);
+    } catch (error) {
+      setMensagemReq({
+        mensagem: "Erro ao salvar ocorrência. Tente novamente.",
+        erro: true,
+      });
     } finally {
       setIsSaving(false);
     }
@@ -67,20 +72,13 @@ export default function OcorrenciaModal({ pessoaId, onClose }: modalProps) {
 
   return (
     <div className="flex flex-col w-full p-4 h-full">
-      <h2 className="text-2xl font-bold mb-2">Cadastrar Ocorrência</h2>
+      <MensagemPopUp 
+        mensagem={mensagemReq.mensagem}
+        erro={mensagemReq.erro}
+        setMensagemReq={(mensagem) => setMensagemReq({ mensagem, erro: false })}
 
-      {isError && (
-        <div
-          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
-          role="alert"
-        >
-          <strong className="font-bold">Erro!</strong>
-          <span className="block sm:inline">
-            {" "}
-            Não foi possível salvar a ocorrência.
-          </span>
-        </div>
-      )}
+      />
+      <h2 className="text-2xl font-bold mb-2">Cadastrar Ocorrência</h2>
 
       <div className="flex justify-between gap-5 flex-col lg:flex-row-reverse mb-4 flex-grow">
         <InputAnexo

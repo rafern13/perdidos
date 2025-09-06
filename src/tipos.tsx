@@ -106,3 +106,8 @@ export type Ocorrencia = {
   id: number,
   anexos: string[],
 }
+
+export type MensagemProps = {
+  mensagem: string;
+  erro: boolean;
+};

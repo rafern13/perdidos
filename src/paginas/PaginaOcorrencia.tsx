@@ -4,6 +4,7 @@ import { FaArrowLeft, FaShareAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import Modal from "../componentes/Modal";
 import OcorrenciaModal from "../componentes/CadastroOcorrenciaModal";
+import MensagemPopUp from "@/componentes/ErroPopUp";
 
 
 export default function PessoaDetalhes() {
@@ -11,6 +12,7 @@ export default function PessoaDetalhes() {
   const navigate = useNavigate();
   const [isLoading, setisLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [erroReq, setErroReq] = useState<string>("");
   const [pessoa, setPessoa] = useState<Pessoa>({
     "id": 0,
     "nome": "",
@@ -53,8 +55,8 @@ export default function PessoaDetalhes() {
           setPessoa(data);
           setisLoading(false);
         })
-        .catch((err) => {
-          console.error("Erro ao buscar API:", err);
+        .catch(() => {
+          setErroReq("Erro ao buscar os detalhes da pessoa");
           setisLoading(false);
         });
          
@@ -62,6 +64,7 @@ export default function PessoaDetalhes() {
 
   return (
     <div className="max-w-4xl rounded-2xl mt-1 border border-gray-600 mx-auto py-5 px-4">
+      <MensagemPopUp erroReq={erroReq} setErroReq={setErroReq} />
       <div className="flex items-center mb-6">
         <button
           onClick={() => navigate(-1)}
