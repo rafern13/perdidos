@@ -23,6 +23,9 @@ export default function Paginacao({totalPaginas, paginaAtual, onPageChange}:  Pa
                   Anterior
                 </button>
               </li>
+              <div className="px-3 py-2 flex mx-0.5 text-gray-700 bg-white">
+                página {paginaAtual + 1} de {totalPaginas}
+              </div>
             
               <li>
                 <button

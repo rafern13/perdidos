@@ -53,7 +53,7 @@ export function BarraPesquisa({ onSearch }: Prop) {
                 onChange={(value) => setFiltros(prevFiltros => ({ ...prevFiltros, status: value }))}
             />
 
-            <div className="flex flex-row gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
                 <div className="flex flex-col justify-normal mb-1">
                     <label className="block text-sm font-medium text-white mb-1">
                         .
