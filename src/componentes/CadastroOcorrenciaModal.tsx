@@ -24,7 +24,7 @@ export default function OcorrenciaModal({ pessoa, onClose }: modalProps) {
     data: "",
     id: pessoa.id,
     anexos: [""],
-    arquivo: new File([], ""),
+    arquivo: [],
   });
 
   const validar = () => {
@@ -57,12 +57,12 @@ export default function OcorrenciaModal({ pessoa, onClose }: modalProps) {
       formData.append("informacao", ocorrencia.informacao);
       formData.append("data", ocorrencia.data);
   
-      if (ocorrencia.arquivo && ocorrencia.arquivo.size > 0) {
-        formData.append("files", ocorrencia.arquivo);
+      if (ocorrencia.arquivo && ocorrencia.arquivo.length > 0) {
+        ocorrencia.arquivo.map((arquivo) => {
+          formData.append("files", arquivo);
+        })
       }
   
-      console.log(req)
-
       const res = await fetch(req, {
         method: "POST",
         body: formData,
@@ -105,14 +105,12 @@ export default function OcorrenciaModal({ pessoa, onClose }: modalProps) {
 
       <div className="flex justify-between gap-5 flex-col lg:flex-row-reverse mb-4 flex-grow">
         <InputAnexo
-          setArquivo={(arquivo) => {
-            if (Array.isArray(arquivo)) {
-              setOcorrencia({ ...ocorrencia, arquivo: arquivo[0] });
-            } else if (arquivo) {
-              setOcorrencia({ ...ocorrencia, arquivo: arquivo });
+          setArquivo={(arquivos) => {
+              setOcorrencia({ ...ocorrencia, arquivo: arquivos });
             }
-          }}
+          }
           label="Anexar arquivo"
+          multiple={true}
           preview={true}
           previewWidth={200}
           previewHeight={200}

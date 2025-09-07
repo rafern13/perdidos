@@ -104,7 +104,7 @@ export type Ocorrencia = {
   data: string,
   id: number,
   anexos: string[],
-  arquivo: File,
+  arquivo: File[] | null,
 }
 
 export type MensagemProps = {
