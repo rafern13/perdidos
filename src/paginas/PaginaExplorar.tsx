@@ -47,14 +47,14 @@ export default function Component() {
   return (
     <div>
       <Header />
-      <div className="container mx-auto py-6 mt-8">
+      <div className="container mx-auto py-6 mt-12 sm:mt-8">
         <h1 className="text-3xl font-bold text-center mb-6">
           Explorar Pessoas Desaparecidas
         </h1>
         <p className="text-center text-gray-600 mb-10">
           Navegue por todos os registros.
         </p>
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:gap-10 gap-3 mr-5">
+        <div className="flex justify-center flex-col items-center w-full mx-auto sm:grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:gap-10 gap-3 mr-5">
           {pessoas.map((pessoa) => (
             <PessoaCard key={pessoa.id} pessoa={pessoa} />
           ))}

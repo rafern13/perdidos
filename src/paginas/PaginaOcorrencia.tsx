@@ -12,8 +12,9 @@ import MostrarOcorrencias from "@/componentes/MostrarOcorrencias";
 export default function PessoaDetalhes() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
   const [isOcorrenciasLoading, setIsOcorrenciasLoading] = useState(false);
+  const [versaoDados, setVersaoDados] = useState(0);
 
   const [mostrarOcorrencias, setMostrarOcorrencias] = useState(false);
   const [ocorrencias, setOcorrencias] = useState<Ocorrencia[]>([]);
@@ -31,11 +32,15 @@ export default function PessoaDetalhes() {
   const copiarUrl = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
-      setMensagemReq({ mensagem: "Link copiado para a área de transferência!", erro: false }); 
+      setMensagemReq({ mensagem: "Link copiado para a área de transferência!", erro: false });
     } catch {
-      setMensagemReq({ mensagem: "Falha ao copiar o link.", erro: true }); 
+      setMensagemReq({ mensagem: "Falha ao copiar o link.", erro: true });
     }
   };
+
+  const OnCadastroSucesso = () => {
+    setVersaoDados((prev) => prev + 1);
+  }
 
   useEffect(() => {
     if (!id) return;
@@ -80,7 +85,7 @@ export default function PessoaDetalhes() {
       .finally(() => {
         setIsOcorrenciasLoading(false);
       });
-  }, [pessoa]);
+  }, [pessoa, versaoDados]);
 
   const formatarData = (data: string | null | undefined) => {
     if (!data) return "Não informado";
@@ -107,7 +112,7 @@ export default function PessoaDetalhes() {
   }
 
   return (
-    <div className="flex justify-center gap-3 h-screen bg-gray-100 p-4">
+    <div className="flex flex-col xl:flex-row justify-center gap-4 xl:h-screen bg-gray-100 p-4">
       <div className="max-w-4xl w-full rounded-2xl border border-gray-600 py-5 px-4 overflow-y-auto">
         <MensagemPopUp mensagem={mensagemReq.mensagem} erro={false} setMensagemReq={(mensagem) => setMensagemReq({ mensagem, erro: false })} />
         <div className="flex items-center mb-6">
@@ -128,7 +133,10 @@ export default function PessoaDetalhes() {
           />
           <h1 className="text-3xl font-bold text-center">{pessoa.nome}</h1>
           <span className={`px-4 py-1 rounded-full text-sm font-semibold ${pessoa.vivo ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
-            {pessoa.vivo ? "Localizado com vida" : "Não localizado / falecido"}
+            {pessoa.vivo ? "Vivo" : "Falecido"}
+          </span>
+          <span className={`px-4 py-1 rounded-full text-sm font-semibold ${pessoa.vivo ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
+            {pessoa.ultimaOcorrencia.encontradoVivo ? "Localizado" : "Desaparecido"}
           </span>
           <div className="grid grid-cols-2 gap-6 text-center">
             <div>
@@ -180,15 +188,15 @@ export default function PessoaDetalhes() {
             <button onClick={handleOpenModal} className="px-4 py-2 flex justify-center gap-2 items-center cursor-pointer border border-gray-400 rounded-lg hover:bg-gray-400">
               <MdSend size={20}/> Enviar informação
             </button>
-            <button 
-              onClick={() => setMostrarOcorrencias(!mostrarOcorrencias)} 
+            <button
+              onClick={() => setMostrarOcorrencias(!mostrarOcorrencias)}
               className="px-4 py-2 flex justify-center gap-2 items-center cursor-pointer border border-gray-400 rounded-lg hover:bg-gray-400"
             >
-              {mostrarOcorrencias ? <FaEyeSlash/> : <FaEye/>} 
+              {mostrarOcorrencias ? <FaEyeSlash/> : <FaEye/>}
               {mostrarOcorrencias ? "Ocultar ocorrências" : "Mostrar ocorrências"}
             </button>
             <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-              <OcorrenciaModal pessoa={pessoa} onClose={handleCloseModal} /> 
+              <OcorrenciaModal OnCadastroSucesso={OnCadastroSucesso} pessoa={pessoa} onClose={handleCloseModal} />
             </Modal>
           </div>
         </div>
@@ -200,4 +208,4 @@ export default function PessoaDetalhes() {
       )}
     </div>
   );
-}          {/* ... resto do seu JSX que depende de 'pessoa' ... */}
+}

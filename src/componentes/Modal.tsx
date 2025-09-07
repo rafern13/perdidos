@@ -28,7 +28,7 @@ const Modal = ({ children, isOpen, onClose }: ModalProps) => {
       onClick={onClose}
     >
         <div 
-          className="relative w-[60vw] h-[80dvh] bg-white p-6 rounded-lg shadow-lg flex flex-col" 
+          className="relative w-[100vw] h-[100dvh] sm:w-[60vw] sm:h-[80dvh] bg-white p-6 rounded-lg shadow-lg flex flex-col" 
           onClick={(e) => e.stopPropagation()}
         >
             <button 

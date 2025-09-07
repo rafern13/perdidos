@@ -19,7 +19,7 @@ export function TextoInput({ validacaoRegex, label, placeholder, value, onChange
     };
 
     return (
-        <div className="flex flex-col w-80 justify-normal mb-1">
+        <div className="flex flex-col w-50 sm:w-80 justify-normal mb-1">
             <label className="block text-sm font-medium text-gray-700 mb-1">
                 {label}
             </label>

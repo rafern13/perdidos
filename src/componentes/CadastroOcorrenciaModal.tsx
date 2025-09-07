@@ -9,9 +9,10 @@ import { FaRegWindowClose, FaSave } from "react-icons/fa";
 type modalProps = {
     pessoa: Pessoa;
     onClose: () => void;
+    OnCadastroSucesso: () => void;
 }
 
-export default function OcorrenciaModal({ pessoa, onClose }: modalProps) {
+export default function OcorrenciaModal({ pessoa, onClose, OnCadastroSucesso }: modalProps) {
   const [isSaving, setIsSaving] = useState(false);
   const [mensagemReq, setMensagemReq] = useState<MensagemProps>({
     mensagem: "",
@@ -80,6 +81,7 @@ export default function OcorrenciaModal({ pessoa, onClose }: modalProps) {
       })
 
       setTimeout(() => {
+        OnCadastroSucesso();
         onClose();
       }, 3000)
     } catch {
