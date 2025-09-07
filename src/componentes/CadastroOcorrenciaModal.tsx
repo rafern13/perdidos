@@ -22,7 +22,6 @@ export default function OcorrenciaModal({ pessoa, onClose }: modalProps) {
     ocoId: pessoa.ultimaOcorrencia.ocoId,
     informacao: "",
     data: "",
-    descricao: "",
     id: pessoa.id,
     anexos: [""],
     arquivo: new File([], ""),
@@ -57,13 +56,13 @@ export default function OcorrenciaModal({ pessoa, onClose }: modalProps) {
       formData.append("ocoId", String(ocorrencia.ocoId));
       formData.append("informacao", ocorrencia.informacao);
       formData.append("data", ocorrencia.data);
-      formData.append("descricao", ocorrencia.descricao);
-      formData.append("id", String(ocorrencia.id));
   
       if (ocorrencia.arquivo && ocorrencia.arquivo.size > 0) {
-        formData.append("arquivo", ocorrencia.arquivo);
+        formData.append("files", ocorrencia.arquivo);
       }
   
+      console.log(req)
+
       const res = await fetch(req, {
         method: "POST",
         body: formData,
@@ -129,15 +128,6 @@ export default function OcorrenciaModal({ pessoa, onClose }: modalProps) {
               setOcorrencia({ ...ocorrencia, informacao: value })
             }
           />
-          <TextoInput
-            validacaoRegex={/.*/}
-            label="Descrição"
-            placeholder="Descrição do anexo"
-            value={ocorrencia.descricao}
-            onChange={(value) =>
-              setOcorrencia({ ...ocorrencia, descricao: value })
-            }
-          />
           <DataInput
             label="Data de avistamento"
             value={ocorrencia.data}
@@ -145,7 +135,6 @@ export default function OcorrenciaModal({ pessoa, onClose }: modalProps) {
           />
         </div>
       </div>
-
       <div className="flex justify-end items-center gap-2 mt-auto">
         <button
           onClick={onClose}

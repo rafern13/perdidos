@@ -101,7 +101,6 @@ export type DataInputProps = {
 export type Ocorrencia = {
   ocoId: number,
   informacao: string, 
-  descricao: string,
   data: string,
   id: number,
   anexos: string[],

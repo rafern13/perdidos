@@ -1,0 +1,52 @@
+
+*** These modified files were found in JOE when it aborted on Sat Sep  6 18:41:39 2025
+*** JOE was aborted by UNIX signal 1
+
+*** File '(Unnamed)'
+2500/220
+
+*** File '(Unnamed)'
+gcc 6.c -o 6
+
+*** File '(Unnamed)'
+Config
+config
+config.pos
+speed
+prox
+Node
+struct node
+prox
+struct Node
+direita
+
+*** File '(Unnamed)'
+NULL
+find
+Node
+newstruct
+Linked
+valor
+newTree
+esquerda
+numero
+//
+
+*** File '(Unnamed)'
+tabelaHash.go
+tabelaHash.c
+../estudos/listaLinkada2.c
+tabelaHash.c
+tabelaHash.c
+tabelaHash.c
+tabelaHash.c
+tabelaHash.c
+tabelaHash.c
+teste.txt
+/home/rafael/Documentos/projeto-pratico-2/.git/MERGE_MSG
+
+*** File '* Startup Log *'
+Processing '/etc/joe/editorrc'...
+Processing '/etc/joe/ftyperc'...
+Finished processing /etc/joe/ftyperc
+Finished processing /etc/joe/editorrc
