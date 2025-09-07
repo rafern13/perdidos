@@ -135,7 +135,7 @@ export default function OcorrenciaModal({ pessoa, onClose, OnCadastroSucesso }: 
           />
         </div>
       </div>
-      <div className="flex justify-end items-center gap-2 mt-auto">
+      <div className="flex justify-center sm:flex-end items-center gap-2 mt-auto">
         <button
           onClick={onClose}
           className="bg-gray-500 flex justify-center gap-2 items-center text-white px-4 py-2 rounded hover:bg-gray-600"

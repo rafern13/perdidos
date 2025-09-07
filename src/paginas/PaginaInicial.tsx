@@ -94,7 +94,7 @@ export default function PaginaInicialRefatorada() {
   };
 
   return (
-    <div className="min-h-screen overflow-hidden">
+    <div className="min-h-screen mt-6 sm:mt-0 overflow-hidden">
       <MensagemPopUp 
         mensagem={mensagemReq.mensagem} 
         erro={mensagemReq.erro} 

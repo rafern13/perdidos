@@ -47,7 +47,7 @@ export default function Component() {
   return (
     <div>
       <Header />
-      <div className="container mx-auto py-6 mt-12 sm:mt-8">
+      <div className="container mx-auto py-6 mt-22 sm:mt-8">
         <h1 className="text-3xl font-bold text-center mb-6">
           Explorar Pessoas Desaparecidas
         </h1>
