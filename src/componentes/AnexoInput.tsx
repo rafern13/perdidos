@@ -53,6 +53,7 @@ export default function InputAnexo(props: AnexoInputProps) {
       previewUrls.forEach(url => URL.revokeObjectURL(url));
     };
   }, [previewUrls]); 
+  
   return (
     <div>
       <label className="block text-sm font-medium text-gray-700 mb-1">

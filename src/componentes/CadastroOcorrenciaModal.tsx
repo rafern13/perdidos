@@ -114,6 +114,7 @@ export default function OcorrenciaModal({ pessoa, onClose, OnCadastroSucesso }: 
           label="Anexar arquivo"
           multiple={true}
           preview={true}
+          acceptedFormats={[".png", ".jpg", ".jpeg", ".pdf"]}
           previewWidth={200}
           previewHeight={200}
         />
